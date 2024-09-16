@@ -1,0 +1,19 @@
+<div class="container">
+  <h2>Translate a Word</h2>
+  <form [formGroup]="translateForm" (ngSubmit)="onTranslate()">
+    <label for="word">English Word:</label>
+    <input id="word" formControlName="word" type="text" placeholder="Enter an English word" />
+    <button type="submit">Translate</button>
+    <button routerLink="/">Home</button>
+  </form>
+
+  <div *ngIf="translatedWord" class="result">
+    <h3>Arabic Meaning:</h3>
+    <p>{{ translatedWord }}</p>
+    
+    <h4 *ngIf="synonyms.length">Synonyms:</h4>
+    <ul *ngIf="synonyms.length">
+      <li *ngFor="let synonym of synonyms">{{ synonym }}</li>
+    </ul>
+  </div>
+</div>

@@ -1,0 +1,155 @@
+.quiz-container {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 20px;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-family: 'Arial', sans-serif;
+}
+
+h2 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 30px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+.question {
+  margin-bottom: 20px;
+}
+
+.question p {
+  margin-bottom: 10px;
+  font-size: 1.1em;
+  color: #555;
+}
+
+button[type="button"] {
+  background-color: #007BFF;
+  border: none;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-right: 10px;
+}
+
+button[type="button"]:hover {
+  background-color: #0056b3;
+}
+
+input[type="text"] {
+  padding: 10px;
+  width: 100%;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  margin-top: 10px;
+  font-size: 1em;
+}
+
+button[type="submit"], 
+button[routerLink="/"] {
+  background-color: #28a745;
+  border: none;
+  color: white;
+  padding: 12px 20px;
+  font-size: 1em;
+  margin-top: 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover, 
+button[routerLink="/"]:hover {
+  background-color: #218838;
+}
+
+button[routerLink="/"] {
+  background-color: #6c757d;
+}
+
+button[routerLink="/"]:hover {
+  background-color: #5a6268;
+}
+
+.results {
+  margin-top: 30px;
+}
+
+.results h3 {
+  color: #007BFF;
+  font-size: 1.4em;
+}
+
+.results p {
+  font-size: 1.1em;
+  color: #555;
+  margin-top: 5px;
+}
+
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.pagination button {
+  background-color: #007BFF;
+  border: none;
+  color: white;
+  padding: 12px 20px;
+  font-size: 1em;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.pagination button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.pagination button:hover:not(:disabled) {
+  background-color: #0056b3;
+}
+
+.flag {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.flag span {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.flag span.green {
+  background-color: #28a745;
+}
+
+.flag span.orange {
+  background-color: #fd7e14;
+}
+
+.flag span.purple {
+  background-color: #6f42c1;
+}
+
+.flag span.red {
+  background-color: #dc3545;
+}
+
+.flag p {
+  margin: 0;
+}

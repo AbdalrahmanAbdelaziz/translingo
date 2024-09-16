@@ -1,0 +1,32 @@
+<div class="quiz-container">
+  <h2>Test Yourself</h2>
+  <form (ngSubmit)="submitQuiz()">
+    <div *ngFor="let question of quizQuestions; let i = index" class="question">
+      <p>{{ i + 1 }}. Listen to the word:</p>
+      <button type="button" (click)="playWord(question.english)">Play</button>
+      <div class="flag">
+        <span [ngClass]="getFlagClass(question.flag)"></span>
+        <p>Difficulty: {{ getDifficultyLabel(question.flag) }}</p>
+      </div>
+      <input [(ngModel)]="userAnswers[i]" type="text" placeholder="Type the word here" name="answer{{ i }}" />
+    </div>
+    <button type="submit">Submit Quiz</button>
+    <button routerLink="/">Home</button>
+  </form>
+
+  <div *ngIf="quizSubmitted" class="results">
+    <h3>Your Score: {{ score }}/{{ quizQuestions.length }}</h3>
+    <div *ngFor="let question of quizQuestions; let i = index">
+      <p><strong>Question {{ i + 1 }}:</strong> {{ question.english }}</p>
+      <p>Your Answer: {{ userAnswers[i] }}</p>
+      <p *ngIf="userAnswers[i].toLowerCase() !== question.english.toLowerCase()">
+        Correct Answer: {{ question.english }}
+      </p>
+    </div>
+  </div>
+
+  <div class="pagination">
+    <button (click)="previousPage()" [disabled]="currentPage === 1">Previous</button>
+    <button (click)="nextPage()">Next</button>
+  </div>
+</div>
