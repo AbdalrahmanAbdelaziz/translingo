@@ -31,6 +31,7 @@ export class AddWordComponent implements OnInit {
 
   initializeForm(): void {
     this.addWordForm = new FormGroup({
+      title: new FormControl('', Validators.required), // Add the title control
       word: new FormControl('', [Validators.required, Validators.minLength(2)]),
       translation: new FormControl('', Validators.required),
       synonyms: new FormControl('', Validators.required),
@@ -41,6 +42,7 @@ export class AddWordComponent implements OnInit {
       pageSize: new FormControl('', Validators.required)
     });
   }
+  
 
   onSubmit(): void {
     if (this.addWordForm.valid) {

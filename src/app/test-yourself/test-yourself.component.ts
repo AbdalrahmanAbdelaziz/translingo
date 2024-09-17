@@ -23,15 +23,21 @@ export class TestYourselfComponent implements OnInit {
   }
 
   loadQuizQuestions(): void {
-    // Fetch paginated words and shuffle them
-    this.translationService.getPaginatedWords(this.currentPage, this.pageSize).subscribe((questions: Word[]) => {
-      this.quizQuestions = this.shuffleQuestions(questions);
-      this.userAnswers = Array(this.quizQuestions.length).fill('');
+    this.translationService.getPaginatedWords(this.currentPage, this.pageSize).subscribe((response: any) => {
+      if (Array.isArray(response.data)) {
+        this.quizQuestions = this.shuffleQuestions(response.data); // Use response.data
+        this.userAnswers = Array(this.quizQuestions.length).fill('');
+      } else {
+        console.error("Data is not an array", response);
+      }
+    }, error => {
+      console.error("Error fetching quiz questions", error);
     });
   }
+  
+  
 
   shuffleQuestions(questions: Word[]): Word[] {
-    // Shuffle the questions array
     return questions.sort(() => Math.random() - 0.5);
   }
 

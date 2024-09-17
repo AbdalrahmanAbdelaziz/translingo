@@ -4,6 +4,7 @@ import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Word } from '../shared/models/word.interface';
 import { RANDOM_WORDS_URL, TRANSLATE_WORD_URL } from '../shared/constants/urls';
+import { ApiResponseDTO } from '../shared/models/api-response.dto';
 
 @Injectable({
   providedIn: 'root'
@@ -18,9 +19,9 @@ export class TranslationService {
     );
   }
 
-  translate(word: string): Observable<Word | { error: string }> {
+  translate(word: string): Observable<ApiResponseDTO<Word> | { error: string }> {
     const url = TRANSLATE_WORD_URL(word);
-    return this.http.get<Word>(url).pipe(
+    return this.http.get<ApiResponseDTO<Word>>(url).pipe(
       catchError(() => of({ error: 'Translation not found' }))
     );
   }

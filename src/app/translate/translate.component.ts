@@ -20,11 +20,12 @@ export class TranslateComponent implements OnInit {
       word: new FormControl('')
     });
   }
-
+  
+  
   onTranslate(): void {
     const word = this.translateForm.get('word')?.value; 
     if (word) {
-      this.translationService.translate(word).subscribe((result: Word | { error: string }) => {
+      this.translationService.translate(word).subscribe((result: any | { error: string }) => {
         if ('error' in result) {
           this.translatedWord = result.error;
           this.synonyms = [];
