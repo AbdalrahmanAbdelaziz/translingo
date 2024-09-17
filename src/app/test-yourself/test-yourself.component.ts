@@ -24,7 +24,7 @@ export class TestYourselfComponent implements OnInit {
 
   loadQuizQuestions(): void {
     this.translationService.getPaginatedWords(this.currentPage, this.pageSize).subscribe({
-      next: (response: any) => {
+      next: (response: { data: Word[] }) => {
         if (Array.isArray(response.data)) {
           this.quizQuestions = this.shuffleQuestions(response.data);
           this.userAnswers = Array(this.quizQuestions.length).fill('');

@@ -12,12 +12,13 @@ import { ApiResponseDTO } from '../shared/models/api-response.dto';
 export class TranslationService {
   constructor(private http: HttpClient) {}
 
-  getPaginatedWords(page: number, pageSize: number): Observable<Word[]> {
+  getPaginatedWords(page: number, pageSize: number): Observable<{ data: Word[] }> {
     const url = RANDOM_WORDS_URL(page, pageSize);
-    return this.http.get<Word[]>(url).pipe(
-      catchError(() => of([]))
+    return this.http.get<{ data: Word[] }>(url).pipe(
+      catchError(() => of({ data: [] })) // Ensure an object with 'data' property
     );
   }
+  
   
   translate(word: string): Observable<ApiResponseDTO<Word> | { error: string }> {
     const url = TRANSLATE_WORD_URL(word);
