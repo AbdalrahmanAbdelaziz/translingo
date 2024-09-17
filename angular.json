@@ -72,7 +72,8 @@
               "buildTarget": "TransLingo:build:production"
             },
             "development": {
-              "buildTarget": "TransLingo:build:development"
+              "buildTarget": "TransLingo:build:development",
+              "proxyConfig": "proxy.conf.json" 
             }
           },
           "defaultConfiguration": "development"
