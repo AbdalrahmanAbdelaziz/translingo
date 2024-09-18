@@ -1,7 +1,0 @@
-{
-  "/api": {
-    "target": "http://studywithmina.runasp.net",
-    "secure": false,
-    "changeOrigin": true
-  }
-}
