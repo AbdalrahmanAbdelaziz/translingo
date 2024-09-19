@@ -13,8 +13,6 @@ export class WordService {
 
   constructor(private http: HttpClient) {}
 
-
-  
   addWord(word: Word): Observable<ApiResponseDTO<string>> {
     return this.http.post<ApiResponseDTO<string>>(this.apiUrl, word);
   }

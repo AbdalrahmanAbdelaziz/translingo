@@ -18,8 +18,7 @@ export class TranslationService {
       catchError(() => of({ data: [] })) // Ensure an object with 'data' property
     );
   }
-  
-  
+
   translate(word: string): Observable<ApiResponseDTO<Word> | { error: string }> {
     const url = TRANSLATE_WORD_URL(word);
     return this.http.get<ApiResponseDTO<Word>>(url).pipe(
