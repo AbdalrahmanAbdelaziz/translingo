@@ -51,7 +51,7 @@ export class TestYourselfComponent implements OnInit {
 
   submitQuiz(): void {
     this.score = this.quizQuestions.reduce((total, question, index) => {
-      return total + (this.userAnswers[index].toLowerCase() === question.english.toLowerCase() ? 1 : 0);
+      return total + (this.userAnswers[index].toLowerCase() === question.title.toLowerCase() ? 1 : 0);
     }, 0);
     this.quizSubmitted = true;
   }
