@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TranslationService } from '../services/translation.service';
 import { Word } from '../shared/models/word.interface';
 import { FlagEnum } from '../shared/models/flag.enum';
+import { ApiResponseDTO } from '../shared/models/api-response.dto'; // Ensure the path is correct
 
 @Component({
   selector: 'app-test-yourself',
@@ -24,12 +25,12 @@ export class TestYourselfComponent implements OnInit {
 
   loadQuizQuestions(): void {
     this.translationService.getPaginatedWords(this.currentPage, this.pageSize).subscribe({
-      next: (response: { data: Word[] }) => {
-        if (Array.isArray(response.data)) {
+      next: (response: ApiResponseDTO<Word[]>) => {
+        if (response.succeeded && Array.isArray(response.data)) {
           this.quizQuestions = this.shuffleQuestions(response.data);
           this.userAnswers = Array(this.quizQuestions.length).fill('');
         } else {
-          console.error("Expected an array but got", response);
+          console.error("Error response:", response.message);
         }
       },
       error: (error) => {
@@ -37,10 +38,6 @@ export class TestYourselfComponent implements OnInit {
       }
     });
   }
-  
-  
-  
-  
 
   shuffleQuestions(questions: Word[]): Word[] {
     return questions.sort(() => Math.random() - 0.5);

@@ -31,47 +31,52 @@ export class AddWordComponent implements OnInit {
 
   initializeForm(): void {
     this.addWordForm = new FormGroup({
-      title: new FormControl('', Validators.required), // Add the title control
-      word: new FormControl('', [Validators.required, Validators.minLength(2)]),
-      translation: new FormControl('', Validators.required),
-      synonyms: new FormControl('', Validators.required),
+      title: new FormControl('', Validators.required),
+      translation: new FormControl('', Validators.required), // Changed from 'arabic' to 'translation'
+      synonyms: new FormControl(''),
       description: new FormControl(''),
       examples: new FormControl(''),
-      flag: new FormControl(FlagEnum.None, Validators.required),
-      pageNumber: new FormControl('', Validators.required),
-      pageSize: new FormControl('', Validators.required)
+      flag: new FormControl(FlagEnum.None, Validators.required) // Added flag control here
     });
   }
-  
 
   onSubmit(): void {
+    console.log('Form submission initiated');
+    console.log('Form valid:', this.addWordForm.valid);
+    console.log('Form errors:', this.addWordForm.errors);
+
     if (this.addWordForm.valid) {
       const newWord: Word = {
         id: 0,
         title: this.addWordForm.get('title')?.value,
-        english: this.addWordForm.get('word')?.value,
         arabic: this.addWordForm.get('translation')?.value,
+        english: this.addWordForm.get('english')?.value,
         synonyms: this.addWordForm.get('synonyms')?.value.split(',').map(s => s.trim()),
-        examples: this.addWordForm.get('examples')?.value ? this.addWordForm.get('examples')?.value.split(';') : [],
-        flag: FlagEnum.None,  
-        pageNumber: this.addWordForm.get('pageNumber')?.value,  
-        pageSize: this.addWordForm.get('pageSize')?.value      
+        example: this.addWordForm.get('examples')?.value || '',
+        flag: this.addWordForm.get('flag')?.value, // Use the flag value from the form
+        pageNumber: 1, // Set default values if necessary
+        pageSize: 10
       };
-  
+
+      console.log('Submitting word:', newWord);
+
       this.wordService.addWord(newWord).subscribe(
         (response) => {
+          console.log('Response:', response);
           this.successMessage = 'Word added successfully!';
           this.errorMessage = undefined;
           this.addWordForm.reset();
         },
         (error) => {
+          console.error('Error:', error);
           this.errorMessage = 'Failed to add word. Please try again.';
           this.successMessage = undefined;
         }
       );
+    } else {
+      console.log('Form is invalid');
     }
   }
-  
 
   navigateHome(): void {
     this.router.navigate(['/']);

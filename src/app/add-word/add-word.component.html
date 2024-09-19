@@ -2,9 +2,6 @@
   <label for="title">Word Title:</label>
   <input id="title" formControlName="title" required>
 
-  <label for="word">Word in English:</label>
-  <input id="word" formControlName="word" required>
-
   <label for="translation">Translation in Arabic:</label>
   <input id="translation" formControlName="translation" required>
 
@@ -17,11 +14,12 @@
   <label for="examples">Examples of the Word in Statements:</label>
   <textarea id="examples" formControlName="examples"></textarea>
 
-  <label for="pageNumber">Page Number:</label>
-  <input id="pageNumber" formControlName="pageNumber" required>
-
-  <label for="pageSize">Page Size:</label>
-  <input id="pageSize" formControlName="pageSize" required>
+  <label for="flag">Flag:</label>
+  <select id="flag" formControlName="flag">
+    <option *ngFor="let option of flagOptions" [value]="option.value">
+      {{ option.label }}
+    </option>
+  </select>
 
   <button type="submit">Add Word</button>
   <button (click)="navigateHome()" type="button" class="btn-home">Home</button>

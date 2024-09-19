@@ -11,14 +11,23 @@
     <h3>Arabic Meaning:</h3>
     <p>{{ translatedWord }}</p>
     
-    <h4 *ngIf="synonyms.length">Synonyms:</h4>
+    <h4 *ngIf="englishMeaning">English Meaning:</h4>
+    <p *ngIf="englishMeaning">{{ englishMeaning }}</p>
+    
+    <h4 *ngIf="synonyms.length || synonymsMessage">Synonyms:</h4>
+    <p *ngIf="!synonyms.length && synonymsMessage">{{ synonymsMessage }}</p>
     <ul *ngIf="synonyms.length">
       <li *ngFor="let synonym of synonyms">{{ synonym }}</li>
     </ul>
 
-    <h4 *ngIf="examples.length">Examples:</h4>
-    <ul *ngIf="examples.length">
-      <li *ngFor="let example of examples">{{ example }}</li>
-    </ul>
+    <h4 *ngIf="example">Example:</h4>
+    <p *ngIf="example">{{ example }}</p>
+
+    <h4 *ngIf="flag !== FlagEnum.None">Flag:</h4>
+    <p *ngIf="flag === FlagEnum.Green">Green Flag</p>
+    <p *ngIf="flag === FlagEnum.Orange">Orange Flag</p>
+    <p *ngIf="flag === FlagEnum.Purple">Purple Flag</p>
+    <p *ngIf="flag === FlagEnum.Red">Red Flag</p>
+    <p *ngIf="flag === FlagEnum.None">No Flag</p>
   </div>
 </div>

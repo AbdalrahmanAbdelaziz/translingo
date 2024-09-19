@@ -3,7 +3,7 @@
   <form (ngSubmit)="submitQuiz()">
     <div *ngFor="let question of quizQuestions; let i = index" class="question">
       <p>{{ i + 1 }}. Listen to the word:</p>
-      <button type="button" (click)="playWord(question.english)">Play</button>
+      <button type="button" (click)="playWord(question.title)">Play</button>
       <div class="flag">
         <span [ngClass]="getFlagClass(question.flag)"></span>
         <p>Difficulty: {{ getDifficultyLabel(question.flag) }}</p>

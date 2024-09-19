@@ -12,17 +12,17 @@ import { ApiResponseDTO } from '../shared/models/api-response.dto';
 export class TranslationService {
   constructor(private http: HttpClient) {}
 
-  getPaginatedWords(page: number, pageSize: number): Observable<{ data: Word[] }> {
+  getPaginatedWords(page: number, pageSize: number): Observable<ApiResponseDTO<Word[]>> {
     const url = RANDOM_WORDS_URL(page, pageSize);
-    return this.http.get<{ data: Word[] }>(url).pipe(
-      catchError(() => of({ data: [] })) // Ensure an object with 'data' property
+    return this.http.get<ApiResponseDTO<Word[]>>(url).pipe(
+      catchError(() => of({ statusCode: 500, succeeded: false, message: 'Error fetching words', data: [] }))
     );
   }
-  
-  translate(word: string): Observable<{ data: Word[] } | { error: string }> {
+
+  translate(word: string): Observable<ApiResponseDTO<Word>> {
     const url = TRANSLATE_WORD_URL(word);
-    return this.http.get<{ data: Word[] } | { error: string }>(url).pipe(
-      catchError(() => of({ error: 'Translation not found' }))
+    return this.http.get<ApiResponseDTO<Word>>(url).pipe(
+      catchError(() => of({ statusCode: 500, succeeded: false, message: 'Translation not found', data: null }))
     );
   }
 }
