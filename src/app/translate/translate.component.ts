@@ -12,6 +12,7 @@ export class TranslateComponent implements OnInit {
   translateForm!: FormGroup;
   translatedWord: string = ''; 
   synonyms: string[] = []; 
+  examples: string[] = []; 
   
   constructor(private translationService: TranslationService) { }
 
@@ -20,23 +21,30 @@ export class TranslateComponent implements OnInit {
       word: new FormControl('')
     });
   }
-  
-  
+
   onTranslate(): void {
     const word = this.translateForm.get('word')?.value; 
     if (word) {
-      this.translationService.translate(word).subscribe((result: any | { error: string }) => {
+      this.translationService.translate(word).subscribe((result: { data: Word[] } | { error: string }) => {
         if ('error' in result) {
           this.translatedWord = result.error;
           this.synonyms = [];
+          this.examples = [];
+        } else if (result.data.length > 0) {
+          const wordData = result.data[0];
+          this.translatedWord = wordData.arabic || 'Translation not found';
+          this.synonyms = wordData.synonyms || [];
+          this.examples = wordData.examples || [];
         } else {
-          this.translatedWord = result.arabic || 'Translation not found';
-          this.synonyms = result.synonyms || [];
+          this.translatedWord = 'Translation not found';
+          this.synonyms = [];
+          this.examples = [];
         }
       });
     } else {
       this.translatedWord = 'Please enter a word to translate.';
       this.synonyms = [];
+      this.examples = [];
     }
   }
 }

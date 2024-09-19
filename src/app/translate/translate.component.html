@@ -15,5 +15,10 @@
     <ul *ngIf="synonyms.length">
       <li *ngFor="let synonym of synonyms">{{ synonym }}</li>
     </ul>
+
+    <h4 *ngIf="examples.length">Examples:</h4>
+    <ul *ngIf="examples.length">
+      <li *ngFor="let example of examples">{{ example }}</li>
+    </ul>
   </div>
 </div>
