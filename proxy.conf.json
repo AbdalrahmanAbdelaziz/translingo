@@ -1,6 +1,6 @@
 {
   "/api": {
-    "target": "http://studywithmina.runasp.net",
+    "target": "https://studywithmina.runasp.net",
     "secure": false,
     "changeOrigin": true,
     "logLevel": "debug"
