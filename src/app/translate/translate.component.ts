@@ -35,7 +35,7 @@ export class TranslateComponent implements OnInit {
         if (response.succeeded) {
           const wordData = response.data; // Single Word object, not an array
           this.translatedWord = wordData.arabic || 'Translation not found';
-          this.englishMeaning = wordData.english || 'English meaning not available';
+          this.englishMeaning = wordData.english || 'English meaning not available'; // Correctly getting the 'description'
           this.synonyms = wordData.synonyms || [];
           this.synonymsMessage = this.synonyms.length > 0 ? '' : 'Synonyms not available';
           this.example = wordData.example || 'Example not available';
@@ -57,6 +57,15 @@ export class TranslateComponent implements OnInit {
       this.synonymsMessage = ''; 
       this.example = ''; 
       this.flag = FlagEnum.None; // Handle no input
+    }
+  }
+
+  playVoice(): void {
+    const word = this.translateForm.get('word')?.value;
+    if (word) {
+      const utterance = new SpeechSynthesisUtterance(word);
+      utterance.lang = 'en-US';
+      window.speechSynthesis.speak(utterance);
     }
   }
 }

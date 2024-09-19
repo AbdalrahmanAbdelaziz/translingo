@@ -3,13 +3,20 @@
   <form [formGroup]="translateForm" (ngSubmit)="onTranslate()">
     <label for="word">English Word:</label>
     <input id="word" formControlName="word" type="text" placeholder="Enter an English word" />
-    <button type="submit">Translate</button>
-    <button routerLink="/">Home</button>
+    
+    <div class="button-group">
+      <button type="submit">Translate</button>
+      <button routerLink="/">Home</button>
+      <button type="button" (click)="playVoice()" [disabled]="!translateForm.get('word')?.value">Play Voice</button>
+    </div>
   </form>
 
   <div *ngIf="translatedWord" class="result">
-    <h3>Arabic Meaning:</h3>
-    <p>{{ translatedWord }}</p>
+    <h3>Result</h3>
+    <!-- <p>{{ translatedWord }}</p> -->
+
+    <h4 *ngIf="englishMeaning">Arabic Meaning:</h4>
+    <p *ngIf="englishMeaning">{{ translatedWord }}</p>
     
     <h4 *ngIf="englishMeaning">English Meaning:</h4>
     <p *ngIf="englishMeaning">{{ englishMeaning }}</p>

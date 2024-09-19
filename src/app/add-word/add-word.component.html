@@ -1,4 +1,6 @@
 <form [formGroup]="addWordForm" (ngSubmit)="onSubmit()">
+  <h2>Add New Word</h2>
+
   <label for="title">Word Title:</label>
   <input id="title" formControlName="title" required>
 
@@ -11,16 +13,11 @@
   <label for="description">Description of the Word in English:</label>
   <textarea id="description" formControlName="description"></textarea>
 
-  <label for="examples">Examples of the Word in Statements:</label>
+  <label for="examples">Examples of the Word in Statement:</label>
   <textarea id="examples" formControlName="examples"></textarea>
 
-  <label for="flag">Flag:</label>
-  <select id="flag" formControlName="flag">
-    <option *ngFor="let option of flagOptions" [value]="option.value">
-      {{ option.label }}
-    </option>
-  </select>
-
-  <button type="submit">Add Word</button>
-  <button (click)="navigateHome()" type="button" class="btn-home">Home</button>
+  <div class="button-group">
+    <button type="submit">Add Word</button>
+    <button (click)="navigateHome()" type="button" class="btn-home">Home</button>
+  </div>
 </form>
