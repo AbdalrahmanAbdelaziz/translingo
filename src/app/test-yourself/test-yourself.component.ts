@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TranslationService } from '../services/translation.service';
 import { Word } from '../shared/models/word.interface';
 import { FlagEnum } from '../shared/models/flag.enum';
-import { ApiResponseDTO } from '../shared/models/api-response.dto'; // Ensure the path is correct
+import { ApiResponseDTO } from '../shared/models/api-response.dto';
 
 @Component({
   selector: 'app-test-yourself',
@@ -14,8 +14,10 @@ export class TestYourselfComponent implements OnInit {
   userAnswers: string[] = [];
   score: number = 0;
   quizSubmitted: boolean = false;
-  currentPage: number = 1; // For paginated quiz questions
+  currentPage: number = 1;
   pageSize: number = 5;
+  answeredPages: { [page: number]: string[] } = {};
+  nextPageAvailable: boolean = false; // Variable to track if the next page has questions
 
   constructor(private translationService: TranslationService) {}
 
@@ -28,7 +30,8 @@ export class TestYourselfComponent implements OnInit {
       next: (response: ApiResponseDTO<Word[]>) => {
         if (response.succeeded && Array.isArray(response.data)) {
           this.quizQuestions = this.shuffleQuestions(response.data);
-          this.userAnswers = Array(this.quizQuestions.length).fill('');
+          this.userAnswers = this.answeredPages[this.currentPage] || Array(this.quizQuestions.length).fill('');
+          this.checkNextPageAvailability(); // Check if there is a next page
         } else {
           console.error("Error response:", response.message);
         }
@@ -40,7 +43,11 @@ export class TestYourselfComponent implements OnInit {
   }
 
   shuffleQuestions(questions: Word[]): Word[] {
-    return questions.sort(() => Math.random() - 0.5);
+    for (let i = questions.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [questions[i], questions[j]] = [questions[j], questions[i]];
+    }
+    return questions;
   }
 
   playWord(word: string): void {
@@ -54,18 +61,41 @@ export class TestYourselfComponent implements OnInit {
       return total + (this.userAnswers[index].toLowerCase() === question.title.toLowerCase() ? 1 : 0);
     }, 0);
     this.quizSubmitted = true;
+    this.answeredPages[this.currentPage] = [...this.userAnswers]; // Store answers for the current page
   }
 
   nextPage(): void {
+    this.answeredPages[this.currentPage] = [...this.userAnswers]; // Save current answers
     this.currentPage++;
-    this.loadQuizQuestions(); // Load new set of questions
+    this.loadQuizQuestions();
+    this.quizSubmitted = false; // Reset submission status for the new page
   }
 
   previousPage(): void {
     if (this.currentPage > 1) {
+      this.answeredPages[this.currentPage] = [...this.userAnswers]; // Save current answers
       this.currentPage--;
-      this.loadQuizQuestions(); // Load the previous set of questions
+      this.loadQuizQuestions();
+      this.quizSubmitted = false; // Reset submission status for the previous page
     }
+  }
+
+  checkNextPageAvailability(): void {
+    // Asynchronously check if the next page has any questions
+    this.translationService.getPaginatedWords(this.currentPage + 1, this.pageSize).subscribe({
+      next: (response: ApiResponseDTO<Word[]>) => {
+        this.nextPageAvailable = response.succeeded && Array.isArray(response.data) && response.data.length > 0;
+      },
+      error: (error) => {
+        console.error("Error checking next page availability", error);
+      }
+    });
+  }
+
+  getAnswerClass(index: number): string {
+    if (!this.quizSubmitted) return ''; // No highlighting if quiz not submitted
+    const isCorrect = this.userAnswers[index].toLowerCase() === this.quizQuestions[index].title.toLowerCase();
+    return isCorrect ? 'correct-answer' : 'incorrect-answer';
   }
 
   getFlagClass(flag: FlagEnum): string {
@@ -83,18 +113,7 @@ export class TestYourselfComponent implements OnInit {
     }
   }
 
-  getDifficultyLabel(flag: FlagEnum): string {
-    switch (flag) {
-      case FlagEnum.Green:
-        return 'Easy';
-      case FlagEnum.Orange:
-        return 'Medium';
-      case FlagEnum.Purple:
-        return 'Hard';
-      case FlagEnum.Red:
-        return 'Very Hard';
-      default:
-        return 'Unknown';
-    }
+  isQuizSubmitted(): boolean {
+    return this.quizSubmitted;
   }
 }

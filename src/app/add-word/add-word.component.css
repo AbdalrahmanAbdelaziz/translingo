@@ -124,9 +124,8 @@ button[type="submit"]:active {
   border: 1px solid #f5c6cb;
 }
 
-/* Custom Snackbar Styles */
 .success-snackbar {
-  background-color: #4caf50; /* Green */
+  background-color: #4caf50; 
   color: white;
   font-size: 16px;
   padding: 12px;
@@ -134,12 +133,13 @@ button[type="submit"]:active {
 }
 
 .error-snackbar {
-  background-color: #f44336; /* Red */
+  background-color: #f44336; 
   color: white;
   font-size: 16px;
   padding: 12px;
   border-radius: 6px;
 }
+
 
 /* Responsive Styles */
 @media (max-width: 600px) {
@@ -167,3 +167,5 @@ button[type="submit"]:active {
     width: 100%;
   }
 }
+
+

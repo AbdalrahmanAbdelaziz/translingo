@@ -6,27 +6,31 @@
       <button type="button" (click)="playWord(question.title)">Play</button>
       <div class="flag">
         <span [ngClass]="getFlagClass(question.flag)"></span>
-        <p>Difficulty: {{ getDifficultyLabel(question.flag) }}</p>
       </div>
-      <input [(ngModel)]="userAnswers[i]" type="text" placeholder="Type the word here" name="answer{{ i }}" />
+      <input [(ngModel)]="userAnswers[i]" 
+             type="text" 
+             placeholder="Type the word here" 
+             [ngClass]="getAnswerClass(i)" 
+             name="answer{{ i }}" 
+             [disabled]="isQuizSubmitted()" /> <!-- Disable input if quiz is submitted -->
     </div>
-    <button type="submit">Submit Quiz</button>
+    <button type="submit" [disabled]="isQuizSubmitted()">Submit Quiz</button>
     <button routerLink="/">Home</button>
   </form>
 
   <div *ngIf="quizSubmitted" class="results">
     <h3>Your Score: {{ score }}/{{ quizQuestions.length }}</h3>
     <div *ngFor="let question of quizQuestions; let i = index">
-      <p><strong>Question {{ i + 1 }}:</strong> {{ question.english }}</p>
-      <p>Your Answer: {{ userAnswers[i] }}</p>
-      <p *ngIf="userAnswers[i].toLowerCase() !== question.english.toLowerCase()">
-        Correct Answer: {{ question.english }}
+      <p><strong>Question {{ i + 1 }}:</strong></p>
+      <p>Your Answer: <span [ngClass]="getAnswerClass(i)">{{ userAnswers[i] }}</span></p>
+      <p *ngIf="userAnswers[i].toLowerCase() !== question.title.toLowerCase()">
+        Correct Answer: {{ question.title }}
       </p>
     </div>
   </div>
 
   <div class="pagination">
     <button (click)="previousPage()" [disabled]="currentPage === 1">Previous</button>
-    <button (click)="nextPage()">Next</button>
+    <button (click)="nextPage()" [disabled]="!nextPageAvailable">Next</button>
   </div>
 </div>

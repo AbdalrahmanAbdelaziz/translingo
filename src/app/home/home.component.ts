@@ -21,4 +21,8 @@ export class HomeComponent {
   navigateToAddWord() {
     this.router.navigate(['/add-word']);
   }
+
+  navigateToDictionary(){
+    this.router.navigate(['/dictionary'])
+  }
 }
