@@ -58,7 +58,10 @@ export class TestYourselfComponent implements OnInit {
 
   submitQuiz(): void {
     this.score = this.quizQuestions.reduce((total, question, index) => {
-      return total + (this.userAnswers[index].toLowerCase() === question.title.toLowerCase() ? 1 : 0);
+      const userAnswer = this.userAnswers[index].trim().toLowerCase(); // Trim and lowercase
+      const correctAnswer = question.title.toLowerCase(); // Lowercase for comparison
+      console.log(`User Answer: ${userAnswer}, Correct Answer: ${correctAnswer}`); // Debugging log
+      return total + (userAnswer === correctAnswer ? 1 : 0);
     }, 0);
     this.quizSubmitted = true;
     this.answeredPages[this.currentPage] = [...this.userAnswers];
@@ -93,7 +96,7 @@ export class TestYourselfComponent implements OnInit {
 
   getAnswerClass(index: number): string {
     if (!this.quizSubmitted) return '';
-    const isCorrect = this.userAnswers[index].toLowerCase() === this.quizQuestions[index].title.toLowerCase();
+    const isCorrect = this.userAnswers[index].trim().toLowerCase() === this.quizQuestions[index].title.toLowerCase();
     return isCorrect ? 'correct-answer' : 'incorrect-answer';
   }
 
