@@ -12,6 +12,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { DictionaryComponent } from './dictionary/dictionary.component';
 import { ModalConfirmComponent } from './modal-confirm/modal-confirm.component';
+import { HeaderComponent } from './header/header.component';
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import { ModalConfirmComponent } from './modal-confirm/modal-confirm.component';
     AddWordComponent,
     DictionaryComponent,
     ModalConfirmComponent,
+    HeaderComponent,
     
   ],
   imports: [
