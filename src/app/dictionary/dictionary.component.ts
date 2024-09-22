@@ -64,7 +64,7 @@ export class DictionaryComponent implements OnInit {
               this.words[index] = { ...this.wordToEdit! };
             }
             this.cancelEdit();
-            this.updatePaginatedWords(); // Update the paginated view
+            this.updatePaginatedWords(); 
           } else {
             console.error("Error updating word:", response.message);
           }
@@ -93,7 +93,7 @@ export class DictionaryComponent implements OnInit {
           if (response.succeeded) {
             this.words = this.words.filter(word => word.id !== this.wordToDeleteId);
             this.closeModal();
-            this.updatePaginatedWords(); // Update the paginated view
+            this.updatePaginatedWords(); 
           } else {
             console.error("Error deleting word:", response.message);
           }

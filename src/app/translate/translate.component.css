@@ -181,6 +181,7 @@ button[type="button"]:hover {
     width: 100%;
     padding: 15px;
     font-size: 1.3em;
+    margin-right: 0; /* Remove margin for mobile */
   }
 
   .button-group {
@@ -188,13 +189,21 @@ button[type="button"]:hover {
     gap: 10px;
   }
 
-  .result h3, .result p, .result h4 {
+  .result h3,
+  .result p,
+  .result h4 {
     font-size: 1.2em;
   }
 
   input[type="text"] {
     padding: 12px;
     font-size: 1em;
+  }
+
+  /* Adjust result list items */
+  .result ul li {
+    font-size: 1em; /* Slightly smaller font size */
+    padding: 10px; /* Adjust padding */
   }
 }
 

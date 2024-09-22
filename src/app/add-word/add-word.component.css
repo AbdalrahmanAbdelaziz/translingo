@@ -7,6 +7,7 @@ body {
   color: #333;
 }
 
+/* Form Styles */
 form {
   max-width: 600px;
   margin: 20px auto;
@@ -140,7 +141,6 @@ button[type="submit"]:active {
   border-radius: 6px;
 }
 
-
 /* Responsive Styles */
 @media (max-width: 600px) {
   form {
@@ -152,6 +152,10 @@ button[type="submit"]:active {
     font-size: 1.6em;
   }
 
+  label {
+    font-size: 14px;
+  }
+
   input, textarea {
     font-size: 14px;
     padding: 8px;
@@ -161,11 +165,19 @@ button[type="submit"]:active {
     width: 100%;
     font-size: 1em;
     padding: 12px 0;
+    margin: 10px 0; /* Reduced margin for mobile */
   }
 
   .btn-home {
     width: 100%;
   }
+
+  .alert {
+    font-size: 14px; /* Smaller font size for alerts */
+  }
+
+  .success-snackbar, .error-snackbar {
+    font-size: 14px; /* Smaller font size for snackbars */
+    padding: 10px; /* Reduced padding for snackbars */
+  }
 }
-
-

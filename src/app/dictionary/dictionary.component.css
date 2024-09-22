@@ -11,7 +11,7 @@ h2 {
   text-align: center;
   color: #333;
   margin-bottom: 30px;
-  font-size: 2.2em; /* Slightly larger for emphasis */
+  font-size: 2.2em; 
 }
 
 table {
@@ -19,7 +19,7 @@ table {
   border-collapse: collapse;
   margin-top: 20px;
   border-radius: 8px;
-  overflow: hidden; /* For rounded corners */
+  overflow: hidden; 
 }
 
 table th, table td {
@@ -32,7 +32,7 @@ table th {
   background-color: #007BFF;
   color: white;
   font-weight: bold;
-  text-transform: uppercase; /* Uppercase for table headers */
+  text-transform: uppercase; 
 }
 
 table tr:nth-child(even) {
@@ -48,7 +48,7 @@ input {
   font-size: 14px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  width: calc(100% - 22px); /* Full width with padding */
+  width: calc(100% - 22px);
   margin-top: 5px;
 }
 
@@ -57,7 +57,7 @@ input {
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s, transform 0.2s; /* Added transform for effect */
+  transition: background-color 0.3s, transform 0.2s; 
 }
 
 .btn-update {
@@ -67,13 +67,13 @@ input {
 
 .btn-update:hover {
   background-color: #45a049;
-  transform: scale(1.05); /* Slight scale effect on hover */
+  transform: scale(1.05); 
 }
 
 .btn-delete {
   background-color: #f44336;
   color: white;
-  margin-left: 10px; /* Distance between Save and Delete buttons */
+  margin-left: 10px; 
 }
 
 .btn-delete:hover {
@@ -84,7 +84,7 @@ input {
 .btn-save {
   background-color: #2196F3;
   color: white;
-  margin-left: 10px; /* Distance between Save and Delete buttons */
+  margin-left: 10px; 
 }
 
 .btn-save:hover {
@@ -95,7 +95,7 @@ input {
 .btn-cancel {
   background-color: #757575;
   color: white;
-  margin-left: 10px; /* Distance between Cancel and Save buttons */
+  margin-left: 10px; 
 }
 
 .btn-cancel:hover {
@@ -116,7 +116,7 @@ input {
   cursor: pointer;
   font-size: 16px;
   border-radius: 5px;
-  transition: background-color 0.3s, transform 0.2s; /* Added transform */
+  transition: background-color 0.3s, transform 0.2s; 
 }
 
 .btn-home:hover {
@@ -126,7 +126,7 @@ input {
 
 .pagination {
   display: flex;
-  justify-content: center; /* Centering the pagination buttons */
+  justify-content: center; 
   margin-top: 20px;
 }
 
@@ -138,8 +138,8 @@ input {
   font-size: 1em;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s, transform 0.2s; /* Added transform */
-  margin: 0 5px; /* Space between buttons */
+  transition: background-color 0.3s, transform 0.2s; 
+  margin: 0 5px; 
 }
 
 .pagination button:disabled {
@@ -150,4 +150,36 @@ input {
 .pagination button:hover:not(:disabled) {
   background-color: #0056b3;
   transform: scale(1.05);
+}
+
+/* Responsive Styles */
+@media (max-width: 600px) {
+  .dictionary-container {
+    margin: 10px;
+    padding: 15px;
+  }
+
+  h2 {
+    font-size: 1.8em;
+  }
+
+  table th, table td {
+    padding: 10px 8px;
+    font-size: 14px;
+  }
+
+  input {
+    font-size: 12px;
+    padding: 8px;
+  }
+
+  .btn-update, .btn-delete, .btn-save, .btn-cancel, .btn-home {
+    font-size: 14px;
+    padding: 8px 10px;
+  }
+
+  .pagination button {
+    padding: 8px 15px;
+    font-size: 0.9em;
+  }
 }

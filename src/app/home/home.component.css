@@ -21,3 +21,16 @@
 .btn:hover {
   background-color: #0056b3;
 }
+
+/* Responsive Styles */
+@media (max-width: 600px) {
+  .home-container {
+    margin-top: 50px; /* Reduce margin for smaller screens */
+  }
+
+  .btn {
+    font-size: 16px; /* Slightly smaller font size */
+    padding: 8px 15px; /* Adjust padding for buttons */
+    margin: 5px; /* Reduce margin between buttons */
+  }
+}

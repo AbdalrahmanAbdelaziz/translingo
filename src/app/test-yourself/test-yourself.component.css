@@ -162,13 +162,40 @@ button[routerLink="/"]:hover {
   color: red;
 }
 
-.quiz-container {
-  max-width: 600px;
-  margin: 40px auto;
-  padding: 20px;
-  border-radius: 8px;
-  background-color: #f9f9f9;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  font-family: 'Arial', sans-serif;
-}
+/* Responsive Styles */
+@media (max-width: 600px) {
+  .quiz-container {
+    margin: 20px; /* Reduce margin for smaller screens */
+    padding: 15px; /* Adjust padding */
+  }
 
+  h2 {
+    font-size: 1.5em; /* Smaller heading for mobile */
+    margin-bottom: 20px; /* Adjust margin */
+  }
+
+  .question p {
+    font-size: 1em; /* Slightly smaller question text */
+  }
+
+  button[type="button"],
+  button[type="submit"],
+  button[routerLink="/"] {
+    padding: 10px; /* Adjust button padding */
+    font-size: 0.9em; /* Smaller font size for buttons */
+    margin: 5px 0; /* Adjust margin */
+  }
+
+  input[type="text"] {
+    font-size: 0.9em; /* Smaller font size for input */
+  }
+
+  .pagination {
+    flex-direction: column; /* Stack pagination buttons on top of each other */
+    align-items: center; /* Center the buttons */
+  }
+
+  .pagination button {
+    margin: 5px 0; /* Adjust margin for pagination buttons */
+  }
+}
