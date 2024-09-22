@@ -17,7 +17,7 @@ export class TestYourselfComponent implements OnInit {
   currentPage: number = 1;
   pageSize: number = 5;
   answeredPages: { [page: number]: string[] } = {};
-  nextPageAvailable: boolean = false; // Variable to track if the next page has questions
+  nextPageAvailable: boolean = false;
 
   constructor(private translationService: TranslationService) {}
 
@@ -31,7 +31,7 @@ export class TestYourselfComponent implements OnInit {
         if (response.succeeded && Array.isArray(response.data)) {
           this.quizQuestions = this.shuffleQuestions(response.data);
           this.userAnswers = this.answeredPages[this.currentPage] || Array(this.quizQuestions.length).fill('');
-          this.checkNextPageAvailability(); // Check if there is a next page
+          this.checkNextPageAvailability();
         } else {
           console.error("Error response:", response.message);
         }
@@ -61,27 +61,26 @@ export class TestYourselfComponent implements OnInit {
       return total + (this.userAnswers[index].toLowerCase() === question.title.toLowerCase() ? 1 : 0);
     }, 0);
     this.quizSubmitted = true;
-    this.answeredPages[this.currentPage] = [...this.userAnswers]; // Store answers for the current page
+    this.answeredPages[this.currentPage] = [...this.userAnswers];
   }
 
   nextPage(): void {
-    this.answeredPages[this.currentPage] = [...this.userAnswers]; // Save current answers
+    this.answeredPages[this.currentPage] = [...this.userAnswers];
     this.currentPage++;
     this.loadQuizQuestions();
-    this.quizSubmitted = false; // Reset submission status for the new page
+    this.quizSubmitted = false;
   }
 
   previousPage(): void {
     if (this.currentPage > 1) {
-      this.answeredPages[this.currentPage] = [...this.userAnswers]; // Save current answers
+      this.answeredPages[this.currentPage] = [...this.userAnswers];
       this.currentPage--;
       this.loadQuizQuestions();
-      this.quizSubmitted = false; // Reset submission status for the previous page
+      this.quizSubmitted = false;
     }
   }
 
   checkNextPageAvailability(): void {
-    // Asynchronously check if the next page has any questions
     this.translationService.getPaginatedWords(this.currentPage + 1, this.pageSize).subscribe({
       next: (response: ApiResponseDTO<Word[]>) => {
         this.nextPageAvailable = response.succeeded && Array.isArray(response.data) && response.data.length > 0;
@@ -93,7 +92,7 @@ export class TestYourselfComponent implements OnInit {
   }
 
   getAnswerClass(index: number): string {
-    if (!this.quizSubmitted) return ''; // No highlighting if quiz not submitted
+    if (!this.quizSubmitted) return '';
     const isCorrect = this.userAnswers[index].toLowerCase() === this.quizQuestions[index].title.toLowerCase();
     return isCorrect ? 'correct-answer' : 'incorrect-answer';
   }

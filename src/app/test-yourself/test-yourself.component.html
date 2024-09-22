@@ -12,7 +12,7 @@
              placeholder="Type the word here" 
              [ngClass]="getAnswerClass(i)" 
              name="answer{{ i }}" 
-             [disabled]="isQuizSubmitted()" /> <!-- Disable input if quiz is submitted -->
+             [disabled]="isQuizSubmitted()" />
     </div>
     <button type="submit" [disabled]="isQuizSubmitted()">Submit Quiz</button>
     <button routerLink="/">Home</button>
