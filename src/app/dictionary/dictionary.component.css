@@ -1,3 +1,4 @@
+/* General Styles */
 body {
   margin: 0;
   padding: 0;
@@ -91,13 +92,6 @@ input:focus {
   background-color: #e8f0fe; /* Light blue on focus */
 }
 
-/* Flag Color Indicator */
-.flag-color {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-}
-
 /* Icon Button Styles */
 .btn-icon-edit, .btn-icon-delete, .btn-icon-save, .btn-icon-cancel {
   background: none;
@@ -107,45 +101,19 @@ input:focus {
   transition: transform 0.2s;
 }
 
-.btn-icon-edit i {
+.btn-icon-edit i, .btn-icon-delete i, .btn-icon-save i, .btn-icon-cancel i {
   font-size: 1.5em;
-  color: #4CAF50;
 }
 
-.btn-icon-edit:hover {
-  transform: scale(1.1);
-  color: #388E3C;
-}
+.btn-icon-edit { color: #4CAF50; }
+.btn-icon-delete { color: #f44336; }
+.btn-icon-save { color: #2196F3; }
+.btn-icon-cancel { color: #757575; }
 
-.btn-icon-delete i {
-  font-size: 1.5em;
-  color: #f44336;
-}
-
-.btn-icon-delete:hover {
-  transform: scale(1.1);
-  color: #d32f2f;
-}
-
-.btn-icon-save i {
-  font-size: 1.5em;
-  color: #2196F3;
-}
-
-.btn-icon-save:hover {
-  transform: scale(1.1);
-  color: #1976D2;
-}
-
-.btn-icon-cancel i {
-  font-size: 1.5em;
-  color: #757575;
-}
-
-.btn-icon-cancel:hover {
-  transform: scale(1.1);
-  color: #616161;
-}
+.btn-icon-edit:hover { color: #388E3C; }
+.btn-icon-delete:hover { color: #d32f2f; }
+.btn-icon-save:hover { color: #1976D2; }
+.btn-icon-cancel:hover { color: #616161; }
 
 .home-button-container {
   text-align: center;
@@ -246,7 +214,7 @@ input.dark-mode:focus, .flag-dropdown.dark-mode:focus {
 }
 
 .flag-select-container select {
-  width: 200px;
+  width: 100%;
   padding: 10px;
   border-radius: 5px;
   border: 1px solid #ccc;
@@ -265,22 +233,32 @@ input.dark-mode:focus, .flag-dropdown.dark-mode:focus {
   padding: 10px;
 }
 
-
 /* Responsive Styles */
 @media (max-width: 600px) {
   .dictionary-container {
     padding: 15px;
+    margin: 10px; /* Reduced margin for small screens */
   }
 
-  table {
-    font-size: 14px;
+  h2 {
+    font-size: 1.8em; /* Adjusted header size */
+  }
+
+  table th, table td {
+    padding: 10px; /* Reduced padding in table cells */
   }
 
   .btn-home {
-    width: 100%;
+    width: 100%; /* Full width button */
+    padding: 10px; /* Adjusted padding */
   }
 
-  input {
-    width: 100%;
+  input, .flag-dropdown {
+    width: 100%; /* Full width input and dropdown */
+  }
+
+  .pagination button {
+    padding: 10px; /* Reduced button padding */
+    font-size: 0.9em; /* Smaller font size */
   }
 }

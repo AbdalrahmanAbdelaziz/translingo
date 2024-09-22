@@ -9,8 +9,8 @@ body {
 
 /* Quiz Container */
 .quiz-container {
-  max-width: 600px;
-  margin: 40px auto;
+  max-width: 90%; /* Changed to 90% for better responsiveness */
+  margin: 20px auto; /* Reduced margin for mobile */
   padding: 20px;
   border-radius: 10px;
   background-color: #ffffff;
@@ -26,8 +26,8 @@ body {
 h2 {
   text-align: center;
   color: #333;
-  margin-bottom: 30px;
-  font-size: 2.2em;
+  margin-bottom: 20px; /* Reduced margin */
+  font-size: 1.8em; /* Smaller font size for mobile */
   text-transform: uppercase;
   transition: color 0.3s;
 }
@@ -36,27 +36,21 @@ h2 {
 label {
   margin-bottom: 10px;
   font-weight: bold;
-  font-size: 1.1em;
+  font-size: 1em; /* Smaller font size */
 }
 
 select, input[type="text"] {
-  padding: 12px;
+  padding: 10px; /* Reduced padding */
   border-radius: 5px;
   border: 1px solid #ccc;
   font-size: 1em;
-  width: calc(100% - 24px);
+  width: calc(100% - 22px); /* Adjusted for padding */
   margin-top: 5px;
   transition: border-color 0.3s, background-color 0.3s;
 }
 
 select {
-  margin-bottom: 20px; /* Added space between select and the content below */
-}
-
-select:focus, input[type="text"]:focus {
-  border-color: #007BFF;
-  background-color: #e8f0fe;
-  outline: none;
+  margin-bottom: 15px; /* Adjusted margin */
 }
 
 /* Buttons */
@@ -64,26 +58,23 @@ button[type="button"], button[type="submit"], button[routerLink="/"] {
   background-color: #007BFF;
   border: none;
   color: white;
-  padding: 12px 20px;
+  padding: 10px 15px; /* Reduced padding */
   font-size: 1em;
-  margin-top: 20px;
+  margin-top: 15px; /* Adjusted margin */
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s, transform 0.2s;
 }
 
-button[type="submit"] {
-  background-color: #28a745; /* Green color for submit */
-  width: 48%; /* Increased width */
+button[type="submit"], button[routerLink="/"] {
+  width: 48%; /* Kept the same */
 }
 
 button[routerLink="/"] {
-  background-color: #dc3545; /* Red color for home */
-  width: 48%; /* Increased width */
-  margin-left: 4%; /* Space between the buttons */
+  margin-left: 4%; /* Kept the same */
 }
 
-button[type="button"]:hover, button[type="submit"]:hover, button[routerLink="/"]:hover {
+button:hover {
   background-color: #0056b3;
   transform: scale(1.05);
 }
@@ -95,92 +86,47 @@ button:disabled {
 
 /* Question Styling */
 .question {
-  margin-bottom: 20px;
-  padding: 15px;
+  margin-bottom: 15px; /* Adjusted margin */
+  padding: 10px; /* Reduced padding */
   border: 1px solid #e0e0e0;
   border-radius: 5px;
   background-color: #fff;
 }
 
 .question p {
-  margin-bottom: 10px;
-  font-size: 1.1em;
+  margin-bottom: 5px; /* Adjusted margin */
+  font-size: 1em; /* Smaller font size */
   color: #555;
 }
 
 /* Results */
 .results {
-  margin-top: 30px;
+  margin-top: 20px; /* Adjusted margin */
 }
 
 .results h3 {
   color: #007BFF;
-  font-size: 1.5em;
-}
-
-.correct-answer {
-  color: green;
-  font-weight: bold;
-}
-
-.incorrect-answer {
-  color: red;
-  font-weight: bold;
+  font-size: 1.3em; /* Smaller font size */
 }
 
 /* Flags */
 .flag {
   display: inline-block;
-  margin-left: 10px;
-  width: 20px;
-  height: 20px;
+  margin-left: 5px; /* Reduced margin */
+  width: 15px; /* Smaller flag size */
+  height: 15px; /* Smaller flag size */
   border-radius: 50%;
-  transition: background-color 0.3s;
-}
-
-.flag-green {
-  background-color: green;
-}
-
-.flag-orange {
-  background-color: orange;
-}
-
-.flag-purple {
-  background-color: purple;
-}
-
-.flag-red {
-  background-color: red;
 }
 
 /* Pagination */
 .pagination {
   display: flex;
   justify-content: center;
-  margin-top: 20px;
+  margin-top: 15px; /* Adjusted margin */
 }
 
 .pagination button {
-  background-color: #007BFF;
-  border: none;
-  color: white;
-  padding: 12px 20px;
-  font-size: 1em;
-  border-radius: 5px;
-  cursor: pointer;
-  margin: 0 5px;
-  transition: background-color 0.3s, transform 0.2s;
-}
-
-.pagination button:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
-}
-
-.pagination button:hover:not(:disabled) {
-  background-color: #0056b3;
-  transform: scale(1.05);
+  padding: 10px 15px; /* Reduced padding */
 }
 
 /* Dark Mode */
@@ -191,7 +137,6 @@ body.dark-mode {
 
 .quiz-container.dark-mode {
   background-color: #333;
-  box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
 }
 
 h2.dark-mode {
@@ -204,37 +149,10 @@ select.dark-mode, input.dark-mode {
   border-color: #777;
 }
 
-select.dark-mode:focus, input.dark-mode:focus {
-  border-color: #aaa;
-}
-
 /* Flag Select Container */
 .flag-select-container {
   text-align: center;
-  background-color: white;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.flag-select-container select {
-  width: 200px;
-  padding: 10px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  font-size: 16px;
-  background-color: #fff;
-  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
-  transition: border 0.3s ease;
-  margin-bottom: 20px;
-}
-
-.flag-select-container select:focus {
-  border: 1px solid #4caf50;
-}
-
-.flag-select-container select option {
-  padding: 10px;
+  padding: 15px; /* Reduced padding */
 }
 
 /* Responsive Styles */
@@ -243,7 +161,21 @@ select.dark-mode:focus, input.dark-mode:focus {
     padding: 15px;
   }
 
-  table {
-    font-size: 0.9em;
+  h2 {
+    font-size: 1.5em; /* Adjusted for smaller screens */
+  }
+
+  button[type="button"], button[type="submit"], button[routerLink="/"] {
+    width: 100%; /* Full width for buttons on mobile */
+    margin: 10px 0; /* Adjusted margin for buttons */
+  }
+
+  .pagination {
+    flex-direction: column; /* Stack pagination buttons vertically */
+  }
+
+  .pagination button {
+    width: 100%; /* Full width for pagination buttons */
+    margin: 5px 0; /* Adjusted margin */
   }
 }
