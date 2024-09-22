@@ -13,10 +13,15 @@ export class DictionaryComponent implements OnInit {
   words: Word[] = [];
   wordToEdit: Word | null = null;
   editMode: boolean = false;
-  showModal: boolean = false; // New property
-  wordToDeleteId: number | null = null; // Store ID of the word to delete
+  showModal: boolean = false;
+  wordToDeleteId: number | null = null;
+  
+  currentPage: number = 1;
+  pageSize: number = 5; 
+  totalWords: number = 0;
+  paginatedWords: Word[] = [];
 
-  constructor(private wordService: WordService, private router: Router) { }
+  constructor(private wordService: WordService, private router: Router) {}
 
   ngOnInit(): void {
     this.loadAllWords();
@@ -27,6 +32,8 @@ export class DictionaryComponent implements OnInit {
       next: (response: ApiResponseDTO<Word[]>) => {
         if (response.succeeded && Array.isArray(response.data)) {
           this.words = response.data;
+          this.totalWords = this.words.length;
+          this.updatePaginatedWords();
         } else {
           console.error("Error fetching words:", response.message);
         }
@@ -35,6 +42,11 @@ export class DictionaryComponent implements OnInit {
         console.error("Error fetching words", error);
       }
     });
+  }
+
+  updatePaginatedWords(): void {
+    const startIndex = (this.currentPage - 1) * this.pageSize;
+    this.paginatedWords = this.words.slice(startIndex, startIndex + this.pageSize);
   }
 
   editWord(word: Word): void {
@@ -52,6 +64,7 @@ export class DictionaryComponent implements OnInit {
               this.words[index] = { ...this.wordToEdit! };
             }
             this.cancelEdit();
+            this.updatePaginatedWords(); // Update the paginated view
           } else {
             console.error("Error updating word:", response.message);
           }
@@ -70,7 +83,7 @@ export class DictionaryComponent implements OnInit {
 
   confirmDelete(id: number): void {
     this.wordToDeleteId = id;
-    this.showModal = true; // Show the modal
+    this.showModal = true;
   }
 
   deleteWord(): void {
@@ -79,7 +92,8 @@ export class DictionaryComponent implements OnInit {
         next: (response) => {
           if (response.succeeded) {
             this.words = this.words.filter(word => word.id !== this.wordToDeleteId);
-            this.closeModal(); // Close the modal
+            this.closeModal();
+            this.updatePaginatedWords(); // Update the paginated view
           } else {
             console.error("Error deleting word:", response.message);
           }
@@ -93,10 +107,28 @@ export class DictionaryComponent implements OnInit {
 
   closeModal(): void {
     this.showModal = false;
-    this.wordToDeleteId = null; // Reset the ID
+    this.wordToDeleteId = null;
   }
 
   navigateHome(): void {
     this.router.navigate(['/home']);
+  }
+
+  nextPage(): void {
+    if (this.currentPage < this.totalPages) {
+      this.currentPage++;
+      this.updatePaginatedWords();
+    }
+  }
+
+  previousPage(): void {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+      this.updatePaginatedWords();
+    }
+  }
+
+  get totalPages(): number {
+    return Math.ceil(this.totalWords / this.pageSize);
   }
 }
