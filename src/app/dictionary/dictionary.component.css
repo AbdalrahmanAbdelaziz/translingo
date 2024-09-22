@@ -1,10 +1,19 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f9;
+  transition: background-color 0.3s, color 0.3s;
+}
+
 .dictionary-container {
   margin: 20px;
   font-family: Arial, sans-serif;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   background-color: #ffffff;
   padding: 20px;
+  transition: transform 0.3s, background-color 0.3s;
 }
 
 h2 {
@@ -12,27 +21,34 @@ h2 {
   color: #333;
   margin-bottom: 30px;
   font-size: 2.2em; 
+  text-transform: uppercase; 
+  transition: color 0.3s;
 }
 
 table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
-  border-radius: 8px;
-  overflow: hidden; 
+  border-radius: 10px;
+  overflow: hidden;
 }
 
 table th, table td {
-  padding: 12px 15px;
+  padding: 15px 20px;
   border: 1px solid #ddd;
   text-align: left;
+  transition: background-color 0.3s, color 0.3s;
 }
 
 table th {
   background-color: #007BFF;
   color: white;
   font-weight: bold;
-  text-transform: uppercase; 
+  text-transform: uppercase;
+}
+
+table th:hover {
+  background-color: #0056b3;
 }
 
 table tr:nth-child(even) {
@@ -40,67 +56,95 @@ table tr:nth-child(even) {
 }
 
 table tr:hover {
-  background-color: #f1f1f1;
+  background-color: #e3f2fd;
 }
 
 input {
-  padding: 10px;
+  padding: 12px;
   font-size: 14px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  width: calc(100% - 22px);
+  width: calc(100% - 24px);
   margin-top: 5px;
+  transition: border-color 0.3s, background-color 0.3s;
 }
 
-.btn-update, .btn-delete, .btn-save, .btn-cancel {
-  padding: 8px 12px;
-  border: none;
+input:focus {
+  border-color: #007BFF;
+  background-color: #e8f0fe;
+  outline: none;
+}
+
+/* Dropdown Styles */
+.flag-dropdown {
+  padding: 10px;
+  border: 1px solid #ccc;
   border-radius: 5px;
+  background-color: #ffffff;
   cursor: pointer;
-  transition: background-color 0.3s, transform 0.2s; 
+  width: 100%;
+  transition: border-color 0.3s, background-color 0.3s;
 }
 
-.btn-update {
-  background-color: #4CAF50;
-  color: white;
+.flag-dropdown:focus {
+  border-color: #007BFF;
+  background-color: #e8f0fe; /* Light blue on focus */
 }
 
-.btn-update:hover {
-  background-color: #45a049;
-  transform: scale(1.05); 
+/* Flag Color Indicator */
+.flag-color {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
 }
 
-.btn-delete {
-  background-color: #f44336;
-  color: white;
-  margin-left: 10px; 
+/* Icon Button Styles */
+.btn-icon-edit, .btn-icon-delete, .btn-icon-save, .btn-icon-cancel {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  transition: transform 0.2s;
 }
 
-.btn-delete:hover {
-  background-color: #d32f2f;
-  transform: scale(1.05);
+.btn-icon-edit i {
+  font-size: 1.5em;
+  color: #4CAF50;
 }
 
-.btn-save {
-  background-color: #2196F3;
-  color: white;
-  margin-left: 10px; 
+.btn-icon-edit:hover {
+  transform: scale(1.1);
+  color: #388E3C;
 }
 
-.btn-save:hover {
-  background-color: #1976D2;
-  transform: scale(1.05);
+.btn-icon-delete i {
+  font-size: 1.5em;
+  color: #f44336;
 }
 
-.btn-cancel {
-  background-color: #757575;
-  color: white;
-  margin-left: 10px; 
+.btn-icon-delete:hover {
+  transform: scale(1.1);
+  color: #d32f2f;
 }
 
-.btn-cancel:hover {
-  background-color: #616161;
-  transform: scale(1.05);
+.btn-icon-save i {
+  font-size: 1.5em;
+  color: #2196F3;
+}
+
+.btn-icon-save:hover {
+  transform: scale(1.1);
+  color: #1976D2;
+}
+
+.btn-icon-cancel i {
+  font-size: 1.5em;
+  color: #757575;
+}
+
+.btn-icon-cancel:hover {
+  transform: scale(1.1);
+  color: #616161;
 }
 
 .home-button-container {
@@ -109,14 +153,14 @@ input {
 }
 
 .btn-home {
-  padding: 10px 30px;
+  padding: 12px 30px;
   border: none;
   background-color: #6c757d;
   color: white;
   cursor: pointer;
   font-size: 16px;
   border-radius: 5px;
-  transition: background-color 0.3s, transform 0.2s; 
+  transition: background-color 0.3s, transform 0.2s;
 }
 
 .btn-home:hover {
@@ -152,34 +196,91 @@ input {
   transform: scale(1.05);
 }
 
+/* Dark Mode */
+body.dark-mode {
+  background-color: #1a1a1a;
+  color: #f5f5f5;
+}
+
+.dictionary-container.dark-mode {
+  background-color: #333;
+  box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
+}
+
+h2.dark-mode {
+  color: #f5f5f5;
+}
+
+table.dark-mode th {
+  background-color: #555;
+}
+
+table.dark-mode td, table.dark-mode th {
+  color: #f5f5f5;
+  border-color: #555;
+}
+
+input.dark-mode, .flag-dropdown.dark-mode {
+  background-color: #555;
+  color: #f5f5f5;
+  border-color: #777;
+}
+
+input.dark-mode:focus, .flag-dropdown.dark-mode:focus {
+  border-color: #aaa;
+}
+
+.flag-select-container {
+  text-align: center;
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.flag-select-container label {
+  font-size: 18px;
+  color: #333;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.flag-select-container select {
+  width: 200px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  background-color: #fff;
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: border 0.3s ease;
+}
+
+.flag-select-container select:focus {
+  outline: none;
+  border: 1px solid #4caf50;
+}
+
+.flag-select-container select option {
+  padding: 10px;
+}
+
+
 /* Responsive Styles */
 @media (max-width: 600px) {
   .dictionary-container {
-    margin: 10px;
     padding: 15px;
   }
 
-  h2 {
-    font-size: 1.8em;
+  table {
+    font-size: 14px;
   }
 
-  table th, table td {
-    padding: 10px 8px;
-    font-size: 14px;
+  .btn-home {
+    width: 100%;
   }
 
   input {
-    font-size: 12px;
-    padding: 8px;
-  }
-
-  .btn-update, .btn-delete, .btn-save, .btn-cancel, .btn-home {
-    font-size: 14px;
-    padding: 8px 10px;
-  }
-
-  .pagination button {
-    padding: 8px 15px;
-    font-size: 0.9em;
+    width: 100%;
   }
 }

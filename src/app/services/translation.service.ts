@@ -5,6 +5,7 @@ import { catchError } from 'rxjs/operators';
 import { Word } from '../shared/models/word.interface';
 import { RANDOM_WORDS_URL, TRANSLATE_WORD_URL } from '../shared/constants/urls';
 import { ApiResponseDTO } from '../shared/models/api-response.dto';
+import { FlagEnum } from '../shared/models/flag.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +13,8 @@ import { ApiResponseDTO } from '../shared/models/api-response.dto';
 export class TranslationService {
   constructor(private http: HttpClient) {}
 
-  getPaginatedWords(page: number, pageSize: number): Observable<ApiResponseDTO<Word[]>> {
-    const url = RANDOM_WORDS_URL(page, pageSize);
+  getPaginatedWords(page: number, pageSize: number, flag: FlagEnum): Observable<ApiResponseDTO<Word[]>> {
+    const url = RANDOM_WORDS_URL(page, pageSize, flag); 
     return this.http.get<ApiResponseDTO<Word[]>>(url).pipe(
       catchError(() => of({ statusCode: 500, succeeded: false, message: 'Error fetching words', data: [] }))
     );

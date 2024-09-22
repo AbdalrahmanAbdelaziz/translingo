@@ -5,7 +5,7 @@ export interface Word {
   title: string;
   arabic: string;
   english: string;
-  example: string; // Single example string
+  example: string; 
   synonyms: string[];
   flag: FlagEnum;
   pageNumber: number;

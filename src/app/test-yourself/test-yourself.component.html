@@ -1,5 +1,15 @@
 <div class="quiz-container">
   <h2>Test Yourself</h2>
+
+  <label for="flagSelect">Choose Question Type:</label>
+  <select id="flagSelect" [(ngModel)]="selectedFlag" (change)="onFlagChange()">
+    <option [value]="flags.None">None</option>
+    <option [value]="flags.Green">Green</option>
+    <option [value]="flags.Orange">Orange</option>
+    <option [value]="flags.Purple">Purple</option>
+    <option [value]="flags.Red">Red</option>
+  </select>
+
   <form (ngSubmit)="submitQuiz()">
     <div *ngFor="let question of quizQuestions; let i = index" class="question">
       <p>{{ i + 1 }}. Listen to the word:</p>
@@ -7,13 +17,14 @@
       <div class="flag">
         <span [ngClass]="getFlagClass(question.flag)"></span>
       </div>
-      <input [(ngModel)]="userAnswers[i]" 
-             type="text" 
-             placeholder="Type the word here" 
-             [ngClass]="getAnswerClass(i)" 
-             name="answer{{ i }}" 
+      <input [(ngModel)]="userAnswers[i]"
+             type="text"
+             placeholder="Type the word here"
+             [ngClass]="getAnswerClass(i)"
+             name="answer{{ i }}"
              [disabled]="isQuizSubmitted()" />
     </div>
+
     <button type="submit" [disabled]="isQuizSubmitted()">Submit Quiz</button>
     <button routerLink="/">Home</button>
   </form>

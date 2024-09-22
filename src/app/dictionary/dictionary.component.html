@@ -1,33 +1,69 @@
 <div class="dictionary-container">
   <h2>Word Dictionary</h2>
-  
+
   <div class="home-button-container">
     <button class="btn-home" (click)="navigateHome()">Home</button>
   </div>
+
+  <!-- Flag Selection -->
+  <div class="flag-select-container">
+    <label for="flagSelect">Select Flag:</label>
+    <select id="flagSelect" [(ngModel)]="selectedFlag" (change)="onFlagChange()">
+      <option [value]="flags.None">None</option>
+      <option [value]="flags.Green">Green</option>
+      <option [value]="flags.Orange">Orange</option>
+      <option [value]="flags.Purple">Purple</option>
+      <option [value]="flags.Red">Red</option>
+    </select>
+  </div>
   
+
   <table>
     <thead>
       <tr>
         <th>English Word</th>
         <th>Arabic Translation</th>
+        <th>Flag</th>
         <th>Actions</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let word of paginatedWords">
+        <td *ngIf="editMode && wordToEdit?.id === word.id">
+          <input [(ngModel)]="wordToEdit.title" placeholder="Enter English word" />
+        </td>
+        <td *ngIf="editMode && wordToEdit?.id === word.id">
+          <input [(ngModel)]="wordToEdit.arabic" placeholder="Enter Arabic translation" />
+        </td>
         <td *ngIf="!editMode || wordToEdit?.id !== word.id">{{ word.title }}</td>
         <td *ngIf="!editMode || wordToEdit?.id !== word.id">{{ word.arabic }}</td>
         <td *ngIf="editMode && wordToEdit?.id === word.id">
-          <input [(ngModel)]="wordToEdit.title" placeholder="Update English Word">
+          <select [(ngModel)]="wordToEdit.flag" (change)="updateWordFlag(wordToEdit)" class="flag-dropdown">
+            <option [ngValue]="0">None</option>
+            <option [ngValue]="1">Green</option>
+            <option [ngValue]="2">Orange</option>
+            <option [ngValue]="3">Purple</option>
+            <option [ngValue]="4">Red</option>
+          </select>
         </td>
-        <td *ngIf="editMode && wordToEdit?.id === word.id">
-          <input [(ngModel)]="wordToEdit.arabic" placeholder="Update Arabic Translation">
+
+        <td *ngIf="!editMode || wordToEdit?.id !== word.id">
+          <div class="flag-color" [ngStyle]="{'background-color': getFlagColor(word.flag)}"></div>
         </td>
+        
         <td>
-          <button *ngIf="!editMode || wordToEdit?.id !== word.id" (click)="editWord(word)" class="btn-update">Update</button>
-          <button *ngIf="!editMode || wordToEdit?.id !== word.id" (click)="confirmDelete(word.id)" class="btn-delete">Delete</button>
-          <button *ngIf="editMode && wordToEdit?.id === word.id" (click)="saveUpdatedWord()" class="btn-save">Save</button>
-          <button *ngIf="editMode && wordToEdit?.id === word.id" (click)="cancelEdit()" class="btn-cancel">Cancel</button>
+          <button *ngIf="!editMode || wordToEdit?.id !== word.id" (click)="editWord(word)" class="btn-icon-edit">
+            <i class="fas fa-edit"></i>
+          </button>
+          <button *ngIf="!editMode || wordToEdit?.id !== word.id" (click)="confirmDelete(word.id)" class="btn-icon-delete">
+            <i class="fas fa-trash-alt"></i>
+          </button>
+          <button *ngIf="editMode && wordToEdit?.id === word.id" (click)="saveUpdatedWord()" class="btn-icon-save">
+            <i class="fas fa-save"></i>
+          </button>
+          <button *ngIf="editMode && wordToEdit?.id === word.id" (click)="cancelEdit()" class="btn-icon-cancel">
+            <i class="fas fa-times"></i>
+          </button>
         </td>
       </tr>
     </tbody>

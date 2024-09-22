@@ -13,6 +13,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { DictionaryComponent } from './dictionary/dictionary.component';
 import { ModalConfirmComponent } from './modal-confirm/modal-confirm.component';
 import { HeaderComponent } from './header/header.component';
+import { FlagColorPipe } from './shared/pipes/dictionary/flag-color.pipe';
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import { HeaderComponent } from './header/header.component';
     DictionaryComponent,
     ModalConfirmComponent,
     HeaderComponent,
+    FlagColorPipe,
     
   ],
   imports: [
